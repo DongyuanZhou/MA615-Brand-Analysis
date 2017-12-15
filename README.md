@@ -1,3 +1,4 @@
+
 # MA615-Brand-Analysis
 Dongyuan Zhou
 
@@ -19,7 +20,15 @@ I get data from twitter used TwitterR.
 
 The code can be found from [Get data.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Get%20data.R).
 
-Besides, I'm intersted in where the tweets were tweeted from. I created a map to show the location used the leaflet package. 
+Besides, I'm intersted in where the tweets were tweeted from. I created a map to show the location used the leaflet package.
+
+Starbucks:
+
+<img width="386" alt="map1" src="https://user-images.githubusercontent.com/32685027/34064328-32925536-e1c6-11e7-8538-0fdac18c8e07.png">
+
+Dunkin' Donuts:
+
+<img width="385" alt="map2" src="https://user-images.githubusercontent.com/32685027/34064329-32a08d40-e1c6-11e7-9716-95d2d0a9721a.png">
 
 The code can be find from [Map.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Map.R).
 
@@ -39,6 +48,10 @@ Hashtags are popular used on Twitter to index keywords or topics and allow users
 
 Hence, I find the top 10 hashtags metioned related to Starbucks and Dunkin' Donuts.
 
+<img width="462" alt="hashtag1" src="https://user-images.githubusercontent.com/32685027/34064326-326fde20-e1c6-11e7-948f-084f27ad1253.png">
+
+<img width="453" alt="hashtag2" src="https://user-images.githubusercontent.com/32685027/34064327-327dd6ce-e1c6-11e7-91d9-deb1cd1f05c1.png">
+
 ### Emoji
 Secondly, emoji! 
 
@@ -46,12 +59,25 @@ Emoji are widely used in our daily messages as well as on nearly all the social 
 
 Therefore, I try to find the popular emoji used by people when they tweeted. 
 
+Starbucks:
+
+Dunkin' Donuts:
+
+
+
 The code can be found from [Emoji.R].
 
 ### Wordcloud
 Thirdly, wordcloud! 
 
-I use wordcloud to find highest frequent word mentiond on tweets and divided it into positive and negetive words. 
+I use wordcloud to find highest frequent word mentiond on tweets. 
+
+Starbucks:
+
+
+
+Dunkin' Donuts:
+
 
 The code can be found from [Wordcloud.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Wordcloud.R).
 
@@ -59,6 +85,8 @@ The code can be found from [Wordcloud.R](https://github.com/DongyuanZhou/MA615-B
 After the initial analysis, we could go through into the sentiment analysis. I calculate the sentiment score for each tweet and plot the distribution of the score. 
 
 The code can be found from [Sentiment.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Sentiment.R).
+
+![analysis](https://user-images.githubusercontent.com/32685027/34064324-325467b2-e1c6-11e7-9653-d7b44f36163b.png)
 
 From the chart above, we could find that Dunkin' Donuts have lower score, which means that people have more positive tweets on Starbucks.
 
