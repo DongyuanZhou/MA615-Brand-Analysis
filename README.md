@@ -17,11 +17,11 @@ The step I used is illustrated as follow:
 ## Data Description
 I get data from twitter used TwitterR.
 
-The code can be found from [Get data.R].
+The code can be found from [Get data.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Get%20data.R).
 
 Besides, I'm intersted in where the tweets were tweeted from. I created a map to show the location used the leaflet package. 
 
-The code can be find from [Map.R].
+The code can be find from [Map.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Map.R).
 
 ## Analysis
 Before I go through the sentiment score analysis, I do EDA to show some interesting information related to later analysis. 
@@ -53,12 +53,12 @@ Thirdly, wordcloud!
 
 I use wordcloud to find highest frequent word mentiond on tweets and divided it into positive and negetive words. 
 
-The code can be found from [Wordcloud.R]
+The code can be found from [Wordcloud.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Wordcloud.R).
 
 ### Sentiment Score
 After the initial analysis, we could go through into the sentiment analysis. I calculate the sentiment score for each tweet and plot the distribution of the score. 
 
-The code can be found from [Sentiment.R]
+The code can be found from [Sentiment.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Sentiment.R).
 
 From the chart above, we could find that Dunkin' Donuts have lower score, which means that people have more positive tweets on Starbucks.
 
