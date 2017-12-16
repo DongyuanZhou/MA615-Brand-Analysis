@@ -30,7 +30,7 @@ Before I go through the sentiment score analysis, I do EDA to show some interest
 
 It is helpful for me to get better understanding towards our data. 
 
-I create [Shiny App](https://dongyuanzhou.shinyapps.io/MA615shiny/) to show all the EDA part. 
+I create [Shiny App] to show all the EDA part. 
 
 The code for Shiny App can be found from [MA615_shiny.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/tree/master/MA615shiny).
 
