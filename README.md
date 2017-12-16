@@ -31,7 +31,7 @@ Before I go through the sentiment score analysis, I do EDA to show some interest
 
 It is helpful for me to get better understanding towards our data. 
 
-I create Shiny App to show all the EDA part. 
+I create [Shiny App](https://dongyuanzhou.shinyapps.io/MA615shiny/) to show all the EDA part. 
 
 The code for Shiny App can be found from [Shiny.R].
 
@@ -76,3 +76,4 @@ From the chart above, we could find that Dunkin' Donuts have lower score, which 
 Then we search the result created by [ACSI](www.theacsi.org/index.php?option=com_content&view=article&id=149&catid=&Itemid=214&c=Dunkin%5C%27+Donuts) and found that Dunkin' Dounuts own slightly higher satisfaction than Starbucks actually.
 It is not same as what we find from twitter, but the difference is not such significant.
 ## Summary and Discussion
+From this analysis, we can get the sentiment score for the brand from twitter, it is somewhat reasonable. However, there is still limitation, since not all the information could get from twitter. We could go deeper analysis in the near future.
