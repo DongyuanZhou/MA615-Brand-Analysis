@@ -1,4 +1,3 @@
-(
 # MA615-Brand-Analysis
 Dongyuan Zhou
 
