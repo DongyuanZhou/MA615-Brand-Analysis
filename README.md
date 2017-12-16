@@ -1,4 +1,4 @@
-
+(
 # MA615-Brand-Analysis
 Dongyuan Zhou
 
@@ -33,7 +33,7 @@ It is helpful for me to get better understanding towards our data.
 
 I create [Shiny App](https://dongyuanzhou.shinyapps.io/MA615shiny/) to show all the EDA part. 
 
-The code for Shiny App can be found from [Shiny.R].
+The code for Shiny App can be found from [MA615_shiny.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/tree/master/MA615shiny).
 
 ### Hashtags
 First, hashtags! 
