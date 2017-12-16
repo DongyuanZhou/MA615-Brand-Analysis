@@ -52,7 +52,7 @@ Therefore, I try to find the popular emoji used by people when they tweeted.
 
 ![emoji](https://user-images.githubusercontent.com/32685027/34073983-ecf1210c-e273-11e7-86ce-cc8f0e9c7dfa.png)
 
-The code can be found from [Emoji.R].
+The code can be found from [Emoji.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Emoji.R).
 
 ### Wordcloud
 Third, wordcloud! 
@@ -79,7 +79,7 @@ It is not same as what we find from twitter, but the difference is not such sign
 From this analysis, we can get the sentiment score for the brand from twitter, it is somewhat reasonable. However, there is still limitation, since not all the information could get from twitter. We could go deeper analysis in the near future.
 
 ## Appendix and reference
-ACSI(American Customer Satisfaction Index) : [_www.theacsi.org/index.php?option=com_content&view=article&id=149&catid=&Itemid=214&c=Dunkin%5C%27+Donuts_](www.theacsi.org/index.php?option=com_content&view=article&id=149&catid=&Itemid=214&c=Dunkin%5C%27+Donuts)
+ACSI(American Customer Satisfaction Index) : [_www.theacsi.org/index.phpoption=com_content&view=article&id=149&catid=&Itemid=214&c=Dunkin%5C%27+Donuts_](www.theacsi.org/index.php?option=com_content&view=article&id=149&catid=&Itemid=214&c=Dunkin%5C%27+Donuts)
 
 Code for Emoji: [_https://github.com/PRISMOJI/emojis_](https://github.com/PRISMOJI/emojis)
 
