@@ -36,33 +36,31 @@ I create Shiny App to show all the EDA part.
 The code for Shiny App can be found from [Shiny.R].
 
 ### Hashtags
-Firstly, hashtags! 
+First, hashtags! 
 
 Hashtags are popular used on Twitter to index keywords or topics and allow users to easily follow topics they are interested. 
 
 Hence, I find the top 10 hashtags metioned related to Starbucks and Dunkin' Donuts.
 
-<img width="462" alt="hashtag1" src="https://user-images.githubusercontent.com/32685027/34064326-326fde20-e1c6-11e7-948f-084f27ad1253.png">
-
-<img width="453" alt="hashtag2" src="https://user-images.githubusercontent.com/32685027/34064327-327dd6ce-e1c6-11e7-91d9-deb1cd1f05c1.png">
+![hashtag2](https://user-images.githubusercontent.com/32685027/34074251-3ab02050-e279-11e7-824b-6b5b04b13f38.png)
 
 ### Emoji
-Secondly, emoji! 
+Second, emoji! 
 
 Emoji are widely used in our daily messages as well as on nearly all the social platforms. With emoji, we could express our mood more accurate and flexible. 
 
 Therefore, I try to find the popular emoji used by people when they tweeted. 
 
-<img width="667" alt="emoji" src="https://user-images.githubusercontent.com/32685027/34064686-22d08f66-e1c9-11e7-97ab-06bdb28e4872.png">
+![emoji](https://user-images.githubusercontent.com/32685027/34073983-ecf1210c-e273-11e7-86ce-cc8f0e9c7dfa.png)
 
 The code can be found from [Emoji.R].
 
 ### Wordcloud
-Thirdly, wordcloud! 
+Third, wordcloud! 
 
 I use wordcloud to find highest frequent word mentiond on tweets. 
 
-<img width="679" alt="wc" src="https://user-images.githubusercontent.com/32685027/34064807-0f7345f2-e1ca-11e7-9d1d-c3f16365ae54.png">
+![wc](https://user-images.githubusercontent.com/32685027/34074101-3976f270-e276-11e7-9635-9dee6e70ebc4.png)
 
 The code can be found from [Wordcloud.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Wordcloud.R).
 
