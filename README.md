@@ -22,13 +22,7 @@ The code can be found from [Get data.R](https://github.com/DongyuanZhou/MA615-Br
 
 Besides, I'm intersted in where the tweets were tweeted from. I created a map to show the location used the leaflet package.
 
-Starbucks:
-
-<img width="386" alt="map1" src="https://user-images.githubusercontent.com/32685027/34064328-32925536-e1c6-11e7-8538-0fdac18c8e07.png">
-
-Dunkin' Donuts:
-
-<img width="385" alt="map2" src="https://user-images.githubusercontent.com/32685027/34064329-32a08d40-e1c6-11e7-9716-95d2d0a9721a.png">
+<img width="734" alt="map" src="https://user-images.githubusercontent.com/32685027/34064896-bfccd116-e1ca-11e7-9772-5383f1d2b4f5.png">
 
 The code can be find from [Map.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Map.R).
 
@@ -59,11 +53,7 @@ Emoji are widely used in our daily messages as well as on nearly all the social 
 
 Therefore, I try to find the popular emoji used by people when they tweeted. 
 
-Starbucks:
-
-Dunkin' Donuts:
-
-
+<img width="667" alt="emoji" src="https://user-images.githubusercontent.com/32685027/34064686-22d08f66-e1c9-11e7-97ab-06bdb28e4872.png">
 
 The code can be found from [Emoji.R].
 
@@ -72,12 +62,7 @@ Thirdly, wordcloud!
 
 I use wordcloud to find highest frequent word mentiond on tweets. 
 
-Starbucks:
-
-
-
-Dunkin' Donuts:
-
+<img width="679" alt="wc" src="https://user-images.githubusercontent.com/32685027/34064807-0f7345f2-e1ca-11e7-9d1d-c3f16365ae54.png">
 
 The code can be found from [Wordcloud.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Wordcloud.R).
 
