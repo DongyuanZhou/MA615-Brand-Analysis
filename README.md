@@ -23,7 +23,7 @@ Besides, I'm intersted in where the tweets were tweeted from. I created a map to
 
 <img width="734" alt="map" src="https://user-images.githubusercontent.com/32685027/34064896-bfccd116-e1ca-11e7-9772-5383f1d2b4f5.png">
 
-The code can be find from [Map.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Map.R).
+The code can be found from [Map.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Map.R).
 
 ## Analysis
 Before I go through the sentiment score analysis, I do EDA to show some interesting information related to later analysis. 
