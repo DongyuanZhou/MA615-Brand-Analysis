@@ -6,41 +6,19 @@ library(plyr)
 library(stringr)
 library(plotly)
 library(wordcloud)
-library(tidytext)
-library(stringr)
-library(wordcloud)
-library(reshape2)
-library(RgoogleMaps)
-library(ggmap)
-library(ggplot2)
-library(maptools)
-library(sp)
-library(tm)
-library(NLP)
-library(devtools)
-library(streamR)
-library(RCurl)
-library(dplyr)
-library(ROAuth)
-library(graphTweets)
-library(igraph)
-library(readr)
 library(leaflet)
-library(rgdal)
-library(SnowballC)
+
 ## data for map
-sb_us.df3 <- read_csv('sb_us.csv')
-dd_us.df3 <- read_csv('dd_us.csv')
+sb_us.df3 <- read.csv('sb_us.csv',header = TRUE, sep = ",",stringsAsFactors = FALSE)
+dd_us.df3 <- read.csv('dd_us.csv',header = TRUE, sep = ",",stringsAsFactors = FALSE)
 mapdata <- rbind(dd_us.df3,sb_us.df3)
 ## data for hashtag
 df.hash <- read.table("hashdata.csv",header = TRUE, sep = ",", stringsAsFactors = FALSE)
 ## data for wordcloud
-sb.df <- read.csv("sb_text.csv", header = TRUE, sep = ",",stringsAsFactors = FALSE)
-dd.df <- read.csv("dd_text.csv", header = TRUE, sep = ",",stringsAsFactors = FALSE)
-worddata <- rbind(dd.df,sb.df)
-data(stop_words)
-my_stop_word <- data.frame(word=character(9))
-my_stop_word$word <- c("star","bucks","starbucks","dunkin","donuts","dunkindonuts","https","rt","ed")
+worddata <- read.csv("worddata.csv",header = TRUE, sep = ",",stringsAsFactors = FALSE)
+## data for sentiment score
+scoredata <- read.csv("sentiment.csv",header = TRUE, sep = ",",stringsAsFactors = FALSE)
+
 
 
 ui <- fluidPage(
@@ -54,14 +32,16 @@ ui <- fluidPage(
                  
                  selectInput ("Number_of_HashtagInput", "X :Top X Hashtag",
                              choices = c(3:10),
-                             selected = 5)),
+                             selected = 5),
+                 sliderInput("maxInput","Maximum Number of Words:",min = 1,  max = 100,  value = 50)),
+    
     
     mainPanel(
       tabsetPanel(type = "tabs",
                   tabPanel("Data Map", leafletOutput("map",width="800px",height="400px")),
                   tabPanel("Hashtag", plotOutput("hashtag",width="700px",height="400px")),
                   tabPanel("Wordcloud", plotOutput("wordcloud",width="600px",height="600px")),
-                  tabPanel("Sentiment Score", plotlyOutput("score",width="600px",height="400px"))
+                  tabPanel("Sentiment Score", plotOutput("score",width="600px",height="400px"))
                   )
     )
     )
@@ -77,8 +57,7 @@ server <- function(input, output) {
       mapdata %>%
       filter(Brand == input$BrandInput)
     color <- ifelse(input$BrandInput == "Starbucks","seagreen","darkorange")
-    leaflet(filtered) %>% addTiles('http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-      attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>')%>%
+    leaflet(filtered) %>% addTiles('http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png')%>%
       setView(-95.7129, 42.358430, zoom = 4)%>% 
       addCircles(~lon, ~lat, popup=sb_us.df3$lon, weight = 3, radius=40,
                           color=color, stroke = TRUE, fillOpacity = 0.8)
@@ -123,51 +102,28 @@ server <- function(input, output) {
       coord_flip()
   })
   
+
   output$wordcloud <- renderPlot({
     
     filtered <- subset(worddata, Brand == input$BrandInput)[,c(1,2)]
     
-    filtered.word <- filtered %>%
-      group_by(id) %>%
-      unnest_tokens(word,text)%>% 
-      anti_join(stop_words)%>%
-      anti_join(my_stop_word)%>%
-      filter(str_detect(word, "^[a-z']+$"))%>%
-      ungroup()
-    
-    word.freq <- filtered.word %>% count(word,sort=TRUE)
-    word.freq%>%with(wordcloud(word, n, max.words = 50,colors=brewer.pal(n=8, "Dark2"),random.order=FALSE,rot.per=0.35))
+    wordcloud(filtered$word, filtered$n, max.words = input$maxInput,colors=brewer.pal(n=8, "Dark2"),
+                               random.order=FALSE,rot.per=0.35)
     
   })
   
   
-  output$score <- renderPlotly({
+  output$score <- renderPlot({
     
-    filtered <- subset(worddata, Brand == input$BrandInput)[,c(1,2)]
-    
-    filtered.word <- filtered %>%
-      group_by(id) %>%
-      unnest_tokens(word,text)%>% 
-      anti_join(stop_words)%>%
-      anti_join(my_stop_word)%>%
-      filter(str_detect(word, "^[a-z']+$"))%>%
-      ungroup()
-    
-    get_sentiments("afinn")
-    AFINN <- get_sentiments("afinn") %>% dplyr::select(word,score)
-    
-    sentiment <- filtered.word %>%
-      inner_join(AFINN, by = "word") %>%
-      group_by(id) %>%
-      summarize(sentiment_score = mean(score))
+    filtered <- subset(scoredata, brand == input$BrandInput)[,c(1,2)]
     
     color <- ifelse(input$BrandInput == "Starbucks","black","deeppink1")
     fill <- ifelse(input$BrandInput == "Starbucks","seagreen","darkorange")
     title <- ifelse(input$BrandInput == "Starbucks","Sentiment score for Starbucks","Sentiment score for Dunkin' Donuts")
     
-    ggplot(sentiment)+
+    ggplot(filtered)+
       geom_bar(mapping=aes(x=sentiment_score), binwidth=1,color = color, fill = fill)+
-      geom_vline(xintercept = mean(sentiment$sentiment_score), color="red",linetype="dashed", size=1)+
+      geom_vline(xintercept = mean(filtered$sentiment_score), color="red",linetype="dashed", size=1)+
       ggtitle(title)
     
   })
