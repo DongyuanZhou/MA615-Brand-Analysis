@@ -6,8 +6,28 @@ library(plyr)
 library(stringr)
 library(plotly)
 library(wordcloud)
+library(tidytext)
+library(stringr)
+library(wordcloud)
+library(reshape2)
+library(RgoogleMaps)
+library(ggmap)
+library(ggplot2)
+library(maptools)
+library(sp)
+library(tm)
+library(NLP)
+library(devtools)
+library(streamR)
+library(RCurl)
+library(dplyr)
+library(ROAuth)
+library(graphTweets)
+library(igraph)
+library(readr)
 library(leaflet)
-
+library(rgdal)
+library(SnowballC)
 ## data for map
 sb_us.df3 <- read_csv('sb_us.csv')
 dd_us.df3 <- read_csv('dd_us.csv')
@@ -18,6 +38,10 @@ df.hash <- read.table("hashdata.csv",header = TRUE, sep = ",", stringsAsFactors 
 sb.df <- read.csv("sb_text.csv", header = TRUE, sep = ",",stringsAsFactors = FALSE)
 dd.df <- read.csv("dd_text.csv", header = TRUE, sep = ",",stringsAsFactors = FALSE)
 worddata <- rbind(dd.df,sb.df)
+data(stop_words)
+my_stop_word <- data.frame(word=character(9))
+my_stop_word$word <- c("star","bucks","starbucks","dunkin","donuts","dunkindonuts","https","rt","ed")
+
 
 ui <- fluidPage(
   titlePanel("Brand Analysis"),
@@ -101,23 +125,18 @@ server <- function(input, output) {
   
   output$wordcloud <- renderPlot({
     
-    filtered <-
-      worddata %>%
-      filter(Brand == input$BrandInput)
+    filtered <- subset(worddata, Brand == input$BrandInput)[,c(1,2)]
     
-    data(stop_words)
-    my_stop_word <- data.frame(word=character(9))
-    my_stop_word$word <- c("star","bucks","starbucks","dunkin","donuts","dunkindonuts","https","rt","ed")
-    
-    filtered %>%
+    filtered.word <- filtered %>%
       group_by(id) %>%
       unnest_tokens(word,text)%>% 
       anti_join(stop_words)%>%
       anti_join(my_stop_word)%>%
       filter(str_detect(word, "^[a-z']+$"))%>%
-      ungroup()%>% 
-      count(word,sort=TRUE)%>% 
-      with(wordcloud(word, n, max.words = 50,colors=brewer.pal(n=8, "Dark2"),random.order=FALSE,rot.per=0.35))
+      ungroup()
+    
+    word.freq <- filtered.word %>% count(word,sort=TRUE)
+    word.freq%>%with(wordcloud(word, n, max.words = 50,colors=brewer.pal(n=8, "Dark2"),random.order=FALSE,rot.per=0.35))
     
   })
   
@@ -126,11 +145,7 @@ server <- function(input, output) {
     
     filtered <- subset(worddata, Brand == input$BrandInput)[,c(1,2)]
     
-    data(stop_words)
-    my_stop_word <- data.frame(word=character(9))
-    my_stop_word$word <- c("star","bucks","starbucks","dunkin","donuts","dunkindonuts","https","rt","ed")
-    
-    filtered <- filtered %>%
+    filtered.word <- filtered %>%
       group_by(id) %>%
       unnest_tokens(word,text)%>% 
       anti_join(stop_words)%>%
@@ -141,7 +156,7 @@ server <- function(input, output) {
     get_sentiments("afinn")
     AFINN <- get_sentiments("afinn") %>% dplyr::select(word,score)
     
-    sentiment <- filtered %>%
+    sentiment <- filtered.word %>%
       inner_join(AFINN, by = "word") %>%
       group_by(id) %>%
       summarize(sentiment_score = mean(score))
