@@ -1,4 +1,5 @@
 library(shiny)
+library(shinydashboard)
 library(tidyverse)
 library(tidyr)
 library(ggplot2)
@@ -21,46 +22,61 @@ scoredata <- read.csv("sentiment.csv",header = TRUE, sep = ",",stringsAsFactors 
 
 
 
-ui <- fluidPage(
-  titlePanel("Brand Analysis"),
-  sidebarLayout(
-    
-    sidebarPanel(radioButtons("BrandInput", "Brand",
-                              choices = c("Starbucks", "DunkinDonuts"),
-                              selected = "Starbucks"),
+ui <- navbarPage("Brand Analysis",
                  
-                 
-                 selectInput ("Number_of_HashtagInput", "X :Top X Hashtag",
-                             choices = c(3:10),
-                             selected = 5),
-                 sliderInput("maxInput","Maximum Number of Words:",min = 1,  max = 100,  value = 50)),
-    
-    
-    mainPanel(
-      tabsetPanel(type = "tabs",
-                  tabPanel("Data Map", leafletOutput("map",width="800px",height="400px")),
-                  tabPanel("Hashtag", plotOutput("hashtag",width="700px",height="400px")),
-                  tabPanel("Wordcloud", plotOutput("wordcloud",width="600px",height="600px")),
-                  tabPanel("Sentiment Score", plotOutput("score",width="600px",height="400px"))
-                  )
-    )
-    )
-  )
+                 tabPanel("Home",
+                          img(src='title.png', align = "center"),
+                          
+                          img(src='brand.png', align = "center"),
+                          textOutput("cite")),
+                 tabPanel("Data Map",
+                          sidebarLayout(
+                            sidebarPanel(radioButtons("BrandInput1", "Brand",
+                                                      choices = c("Starbucks", "DunkinDonuts"),
+                                                      selected = "Starbucks")),
+                            mainPanel(leafletOutput("map",width="800px",height="400px")))),
+                 tabPanel("Hashtag",
+                          sidebarLayout(
+                            sidebarPanel(radioButtons("BrandInput2", "Brand",
+                                                      choices = c("Starbucks", "DunkinDonuts"),
+                                                      selected = "Starbucks"),
+                                         selectInput ("Number_of_HashtagInput", "X :Top X Hashtag",
+                                                      choices = c(3:10),
+                                                      selected = 5)),
+                            mainPanel(plotOutput("hashtag",width="700px",height="400px")))),
+                 tabPanel("Wordcloud",
+                          sidebarLayout(
+                            sidebarPanel(radioButtons("BrandInput3", "Brand",
+                                                      choices = c("Starbucks", "DunkinDonuts"),
+                                                      selected = "Starbucks"),
+                                         sliderInput("maxInput","Maximum Number of Words:",min = 1,  max = 100,  value = 50)),
+                            mainPanel(plotOutput("wordcloud",width="600px",height="600px")))),
+                 tabPanel("Sentiment Score",
+                          sidebarLayout(
+                            sidebarPanel(radioButtons("BrandInput4", "Brand",
+                                                      choices = c("Starbucks", "DunkinDonuts"),
+                                                      selected = "Starbucks")),
+                            mainPanel(plotOutput("score",width="600px",height="400px")))))
+
+
+
+
 
 
 
 server <- function(input, output) {
+  output$cite <- renderText("Cite: https://www.starbucks.com/; https://www.dunkindonuts.com/en")
   
   output$map <- renderLeaflet({
-  
+    
     filtered <-
       mapdata %>%
-      filter(Brand == input$BrandInput)
-    color <- ifelse(input$BrandInput == "Starbucks","seagreen","darkorange")
+      filter(Brand == input$BrandInput1)
+    color <- ifelse(input$BrandInput1 == "Starbucks","seagreen","darkorange")
     leaflet(filtered) %>% addTiles('http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png')%>%
       setView(-95.7129, 42.358430, zoom = 4)%>% 
       addCircles(~lon, ~lat, popup=sb_us.df3$lon, weight = 3, radius=40,
-                          color=color, stroke = TRUE, fillOpacity = 0.8)
+                 color=color, stroke = TRUE, fillOpacity = 0.8)
   })
   
   
@@ -68,8 +84,8 @@ server <- function(input, output) {
     
     filtered <-
       df.hash %>%
-      filter(Brand == input$BrandInput)
-
+      filter(Brand == input$BrandInput2)
+    
     extract.hashes = function(vec){
       hash.pattern = "#[[:alpha:]]+"
       have.hash = grep(x = vec, pattern = hash.pattern)
@@ -85,9 +101,9 @@ server <- function(input, output) {
     dat= head(extract.hashes(vec),50)
     dat= transform(dat,tag = reorder(tag,freq))
     
-    color <- ifelse(input$BrandInput == "Starbucks","black","deeppink1")
-    fill <- ifelse(input$BrandInput == "Starbucks","seagreen","darkorange")
-    title <- ifelse(input$BrandInput == "Starbucks","Starbucks: Top 10 Hashtags","Dunkin' Donuts: Top 10 Hashtags")
+    color <- ifelse(input$BrandInput2 == "Starbucks","black","deeppink1")
+    fill <- ifelse(input$BrandInput2 == "Starbucks","seagreen","darkorange")
+    title <- ifelse(input$BrandInput2 == "Starbucks","Starbucks: Top X Hashtags","Dunkin' Donuts: Top X Hashtags")
     
     ggplot(dat[c(1:input$Number_of_HashtagInput), ], aes(x = tag, y = freq))+
       geom_bar(stat = "identity", color = color, fill = fill)+
@@ -102,24 +118,24 @@ server <- function(input, output) {
       coord_flip()
   })
   
-
+  
   output$wordcloud <- renderPlot({
     
-    filtered <- subset(worddata, Brand == input$BrandInput)[,c(1,2)]
+    filtered <- subset(worddata, Brand == input$BrandInput3)[,c(1,2)]
     
     wordcloud(filtered$word, filtered$n, max.words = input$maxInput,colors=brewer.pal(n=8, "Dark2"),
-                               random.order=FALSE,rot.per=0.35)
+              random.order=FALSE,rot.per=0.35)
     
   })
   
   
   output$score <- renderPlot({
     
-    filtered <- subset(scoredata, brand == input$BrandInput)[,c(1,2)]
+    filtered <- subset(scoredata, brand == input$BrandInput4)[,c(1,2)]
     
-    color <- ifelse(input$BrandInput == "Starbucks","black","deeppink1")
-    fill <- ifelse(input$BrandInput == "Starbucks","seagreen","darkorange")
-    title <- ifelse(input$BrandInput == "Starbucks","Sentiment score for Starbucks","Sentiment score for Dunkin' Donuts")
+    color <- ifelse(input$BrandInput4 == "Starbucks","black","deeppink1")
+    fill <- ifelse(input$BrandInput4 == "Starbucks","seagreen","darkorange")
+    title <- ifelse(input$BrandInput4 == "Starbucks","Sentiment score for Starbucks","Sentiment score for Dunkin' Donuts")
     
     ggplot(filtered)+
       geom_bar(mapping=aes(x=sentiment_score), binwidth=1,color = color, fill = fill)+
