@@ -28,13 +28,21 @@ ui <- navbarPage("Brand Analysis",
                           img(src='title.png', align = "center"),
                           
                           img(src='brand.png', align = "center"),
-                          textOutput("cite")),
+                          br(),
+                          br(),
+                          br(),
+                          br(),
+                          br(),
+                          p("Cite: https://www.starbucks.com/; https://www.dunkindonuts.com/en")),
                  tabPanel("Data Map",
                           sidebarLayout(
                             sidebarPanel(radioButtons("BrandInput1", "Brand",
                                                       choices = c("Starbucks", "DunkinDonuts"),
                                                       selected = "Starbucks")),
-                            mainPanel(leafletOutput("map",width="800px",height="400px")))),
+                            mainPanel(
+                              h1("Where the tweets were tweeted from?"),
+                              br(),
+                              leafletOutput("map",width="800px",height="400px")))),
                  tabPanel("Hashtag",
                           sidebarLayout(
                             sidebarPanel(radioButtons("BrandInput2", "Brand",
@@ -43,20 +51,39 @@ ui <- navbarPage("Brand Analysis",
                                          selectInput ("Number_of_HashtagInput", "X :Top X Hashtag",
                                                       choices = c(3:10),
                                                       selected = 5)),
-                            mainPanel(plotOutput("hashtag",width="700px",height="400px")))),
+                            mainPanel(h1("Hashtags!"),
+                                      br(),
+                                      h4("Hashtags are popular used on Twitter to index keywords or topics and allow users to easily follow topics they are interested."),
+                                      br(),
+                                      h4("Hence, I find the top 10 hashtags metioned related to Starbucks and Dunkin' Donuts."),
+                              plotOutput("hashtag",width="700px",height="400px")))),
+                 tabPanel("Emoji",
+                          h1("Emoji!"),
+                          br(),
+                          h4("Emoji are widely used in our daily messages as well as on nearly all the social platforms. With emoji, we could express our mood more accurate and flexible."),
+                          br(),
+                          h4("Therefore, I try to find the popular emoji used by people when they tweeted."),
+                          br(),
+                          img(src='emoji.png', align = "center")
+                          ),
                  tabPanel("Wordcloud",
                           sidebarLayout(
                             sidebarPanel(radioButtons("BrandInput3", "Brand",
                                                       choices = c("Starbucks", "DunkinDonuts"),
                                                       selected = "Starbucks"),
                                          sliderInput("maxInput","Maximum Number of Words:",min = 1,  max = 100,  value = 50)),
-                            mainPanel(plotOutput("wordcloud",width="600px",height="600px")))),
+                            mainPanel(h1("Wordcloud!"),
+                                      br(),
+                                      h4("Highest frequent word mentiond on tweets"),
+                                      plotOutput("wordcloud",width="600px",height="600px")))),
                  tabPanel("Sentiment Score",
                           sidebarLayout(
                             sidebarPanel(radioButtons("BrandInput4", "Brand",
                                                       choices = c("Starbucks", "DunkinDonuts"),
                                                       selected = "Starbucks")),
-                            mainPanel(plotOutput("score",width="600px",height="400px")))))
+                            mainPanel(h1("Distribution of sentiment score!"),
+                                      br(),
+                                      plotOutput("score",width="600px",height="400px")))))
 
 
 
@@ -65,7 +92,7 @@ ui <- navbarPage("Brand Analysis",
 
 
 server <- function(input, output) {
-  output$cite <- renderText("Cite: https://www.starbucks.com/; https://www.dunkindonuts.com/en")
+  
   
   output$map <- renderLeaflet({
     
@@ -143,6 +170,7 @@ server <- function(input, output) {
       ggtitle(title)
     
   })
+
   
 }
 shinyApp(ui = ui, server = server)

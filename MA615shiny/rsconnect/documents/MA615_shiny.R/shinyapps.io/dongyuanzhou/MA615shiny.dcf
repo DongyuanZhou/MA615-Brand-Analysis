@@ -5,8 +5,8 @@ account: dongyuanzhou
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 249491
-bundleId: 1140106
+bundleId: 1141992
 url: https://dongyuanzhou.shinyapps.io/MA615shiny/
-when: 1513565833.32931
+when: 1513652403.97582
 asMultiple: FALSE
 asStatic: FALSE
