@@ -22,7 +22,6 @@ The code can be found from [Get data.R](https://github.com/DongyuanZhou/MA615-Br
 Besides, I'm intersted in where the tweets were tweeted from. I created a map to show the location used the leaflet package.
 
 <img width="734" alt="map" src="https://user-images.githubusercontent.com/32685027/34064896-bfccd116-e1ca-11e7-9772-5383f1d2b4f5.png">
-
 The code can be found from [Map.R](https://github.com/DongyuanZhou/MA615-Brand-Analysis/blob/master/Map.R).
 
 ## Analysis
@@ -79,7 +78,7 @@ It is not same as what we find from twitter, but the difference is not such sign
 From this analysis, we can get the sentiment score for the brand from twitter, it is somewhat reasonable. However, there is still limitation, since not all the information could get from twitter. We could go deeper analysis in the near future.
 
 ## Appendix and reference
-ACSI(American Customer Satisfaction Index) : _www.theacsi.org/index.phpoption=com_content&view=article&id=149&catid=&Itemid=214&c=Dunkin%5C%27+Donuts_
+ACSI(American Customer Satisfaction Index) : www.theacsi.org/index.phpoption=com_content&view=article&id=149&catid=&Itemid=214&c=Dunkin%5C%27+Donuts
 
 Code for Emoji: [_https://github.com/PRISMOJI/emojis_](https://github.com/PRISMOJI/emojis)
 
