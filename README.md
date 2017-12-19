@@ -71,14 +71,14 @@ The code can be found from [Sentiment.R](https://github.com/DongyuanZhou/MA615-B
 
 From the chart above, we could find that Dunkin' Donuts have lower score, which means that people have more positive tweets on Starbucks.
 
-Then we search the result created by ACSI and found that Dunkin' Dounuts own slightly higher satisfaction than Starbucks actually.
+Then we search the result created by [ACSI](http://www.theacsi.org/) and found that Dunkin' Dounuts own slightly higher satisfaction than Starbucks actually.
 It is not same as what we find from twitter, but the difference is not such significant.
 
 ## Summary and Discussion
 From this analysis, we can get the sentiment score for the brand from twitter, it is somewhat reasonable. However, there is still limitation, since not all the information could get from twitter. We could go deeper analysis in the near future.
 
 ## Appendix and reference
-ACSI(American Customer Satisfaction Index) : www.theacsi.org/index.phpoption=com_content&view=article&id=149&catid=&Itemid=214&c=Dunkin%5C%27+Donuts
+ACSI(American Customer Satisfaction Index) : [_www.theacsi.org/index.phpoption=com_content&view=article&id=149&catid=&Itemid=214&c=Dunkin%5C%27+Donuts_](http://www.theacsi.org/)
 
 Code for Emoji: [_https://github.com/PRISMOJI/emojis_](https://github.com/PRISMOJI/emojis)
 
